@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patch Pocket — Enamel Pin Collection Log</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/lilita-one/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/nunito/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/nunito/600.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/nunito/700.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/nunito/800.css">
+<style>
+:root{
+  --ink:#1D1A2F;
+  --paper:#FFFDF4;
+  --pink:#FF5D8F;
+  --pink-soft:#FFC7DB;
+  --yellow:#FFC933;
+  --teal:#2EC4B6;
+  --teal-soft:#B8F1E6;
+  --blue-soft:#D7DBFF;
+  --lilac:#9B6BFF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+::selection{background:var(--yellow);color:var(--ink)}
+body{
+  font-family:'Nunito',system-ui,sans-serif;
+  color:var(--ink);
+  background-color:#FFEED6;
+  background-image:radial-gradient(#EAC79A 2.2px, transparent 2.8px);
+  background-size:26px 26px;
+  min-height:100vh;
+  padding-bottom:60px;
+}
+button{font-family:inherit;color:inherit}
+
+/* ---------- header ---------- */
+header{
+  max-width:1180px;margin:0 auto;padding:28px 20px 6px;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+}
+.logo{display:flex;align-items:center;gap:14px}
+.logo svg{transform:rotate(-8deg);filter:drop-shadow(3px 3px 0 var(--ink))}
+.logo:hover svg{animation:wobble .5s ease}
+@keyframes wobble{0%,100%{transform:rotate(-8deg)}30%{transform:rotate(6deg)}60%{transform:rotate(-12deg)}}
+h1{
+  font-family:'Lilita One',cursive;font-size:clamp(2.1rem,5vw,3rem);line-height:1;letter-spacing:.5px;
+  text-shadow:3px 3px 0 var(--yellow),6px 6px 0 var(--pink);
+}
+.sub{font-weight:800;font-size:.78rem;letter-spacing:2.5px;text-transform:uppercase;color:#6F6890;margin-top:6px}
+
+/* ---------- buttons ---------- */
+.btn{
+  font-family:'Lilita One',cursive;font-size:.98rem;letter-spacing:.5px;
+  border:3px solid var(--ink);border-radius:14px;padding:.65rem 1.15rem;
+  background:#fff;cursor:pointer;box-shadow:4px 4px 0 var(--ink);
+  transition:transform .13s ease, box-shadow .13s ease;
+}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
+.btn-pink{background:var(--pink);color:#fff;animation:pulse 2.6s infinite}
+.btn-pink:hover{animation:none}
+@keyframes pulse{0%,100%{transform:translate(0,0)}50%{transform:translate(-1px,-3px)}}
+.btn-yellow{background:var(--yellow)}
+.btn-ghost{background:var(--paper)}
+
+/* ---------- summary banner ---------- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.banner{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:20px 0 14px}
+.stat{
+  display:flex;align-items:center;gap:12px;border:3px solid var(--ink);border-radius:16px;
+  padding:12px 16px;background:var(--fill,#fff);box-shadow:5px 5px 0 var(--ink);
+  transition:transform .15s ease;
+}
+.stat:hover{transform:translateY(-3px) rotate(-1deg)}
+.stat-ico{font-size:1.8rem;transform:rotate(-8deg)}
+.stat b{font-family:'Lilita One',cursive;font-size:2rem;line-height:1;display:block}
+.stat small{font-weight:800;font-size:.66rem;letter-spacing:1px;text-transform:uppercase;opacity:.75}
+
+.dup-strip{
+  display:inline-flex;gap:8px;align-items:center;background:#FFE9B8;border:3px solid var(--ink);
+  border-radius:12px;padding:7px 14px;font-weight:800;font-size:.82rem;margin-bottom:14px;
+  transform:rotate(-.6deg);box-shadow:4px 4px 0 var(--ink);
+}
+
+/* ---------- controls ---------- */
+.controls{
+  position:sticky;top:10px;z-index:20;background:var(--paper);border:3px solid var(--ink);
+  border-radius:18px;box-shadow:6px 6px 0 var(--ink);padding:14px;margin-bottom:26px;
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center;
+}
+.searchwrap{flex:1;min-width:230px;position:relative}
+.mag{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:.95rem}
+#searchInput{
+  width:100%;border:3px solid var(--ink);border-radius:999px;padding:10px 38px 10px 38px;
+  font-family:'Nunito';font-weight:700;font-size:.9rem;background:#fff;
+}
+#searchInput:focus{outline:3px solid var(--pink-soft)}
+#clearSearch{
+  position:absolute;right:8px;top:50%;transform:translateY(-50%);width:26px;height:26px;
+  border:2.5px solid var(--ink);border-radius:50%;background:var(--yellow);cursor:pointer;font-weight:900;
+}
+.seg{display:flex;background:#fff;border:3px solid var(--ink);border-radius:999px;padding:3px;gap:3px}
+.seg button{
+  border:none;border-radius:999px;padding:7px 13px;font-weight:800;font-size:.78rem;cursor:pointer;
+  background:transparent;transition:.12s;display:flex;gap:5px;align-items:center;
+}
+.seg button b{font-size:.68rem;background:var(--ink);color:#fff;border-radius:999px;padding:1px 7px}
+.seg button.on{background:var(--ink);color:#fff}
+.seg button.on b{background:#fff;color:var(--ink)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+  display:inline-flex;align-items:center;gap:7px;border:3px solid var(--ink);border-radius:999px;
+  padding:6px 12px;font-weight:800;font-size:.76rem;background:#fff;cursor:pointer;
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+.chip b{font-size:.66rem;background:#EFEAF8;border:2px solid var(--ink);border-radius:999px;padding:0 6px}
+.chip:hover{transform:translateY(-2px);box-shadow:0 3px 0 var(--ink)}
+.chip.on{transform:translateY(-2px);box-shadow:3px 3px 0 var(--ink)}
+.chip-all.on{background:var(--ink);color:#fff}
+.chip-all.on b{background:#fff;color:var(--ink)}
+.chip-gold.on{background:linear-gradient(135deg,#FFE9A8,#FFC933)}
+.chip-silver.on{background:linear-gradient(135deg,#F4F6FA,#C9D0DC)}
+.chip-rainbow.on{background:conic-gradient(from 200deg,#FF5D5D,#FFB43D,#FFE24D,#5AD86A,#4DC3FF,#9B6BFF,#FF5D5D);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.45)}
+.chip-rainbow.on b{background:#fff;color:var(--ink);text-shadow:none}
+.chip-pastel.on{background:linear-gradient(135deg,#FFD6E7,#D9CBFF 55%,#BFF0DC)}
+.chip-dark.on{background:linear-gradient(135deg,#3A3550,#1D1A2F);color:#fff}
+.chip-dark.on b{background:#fff;color:var(--ink)}
+.dot{width:15px;height:15px;border-radius:50%;border:2px solid var(--ink);flex:none}
+.dot-gold{background:linear-gradient(135deg,#FFE9A8,#FFC933)}
+.dot-silver{background:linear-gradient(135deg,#F4F6FA,#C9D0DC)}
+.dot-rainbow{background:conic-gradient(from 200deg,#FF5D5D,#FFB43D,#FFE24D,#5AD86A,#4DC3FF,#9B6BFF,#FF5D5D)}
+.dot-pastel{background:linear-gradient(135deg,#FFD6E7,#D9CBFF 55%,#BFF0DC)}
+.dot-dark{background:linear-gradient(135deg,#3A3550,#1D1A2F)}
+#sortSel{
+  border:3px solid var(--ink);border-radius:999px;padding:8px 12px;font-family:'Nunito';
+  font-weight:800;font-size:.78rem;background:#fff;cursor:pointer;
+}
+.result-line{font-weight:800;font-size:.75rem;letter-spacing:1px;text-transform:uppercase;color:#6F6890;margin:0 4px 14px}
+
+/* ---------- grid & cards ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:24px}
+.tag-gold   {--tag:linear-gradient(135deg,#FFE9A8,#FFC933 55%,#E8A200);--tagshadow:#D89A00;--chiptext:#5C4200}
+.tag-silver {--tag:linear-gradient(135deg,#F4F6FA,#C9D0DC 55%,#9AA4B5);--tagshadow:#8B94A6;--chiptext:#39404E}
+.tag-rainbow{--tag:conic-gradient(from 200deg at 60% 40%,#FF5D5D,#FFB43D,#FFE24D,#5AD86A,#4DC3FF,#9B6BFF,#FF5D5D);--tagshadow:#7A52D6;--chiptext:#fff}
+.tag-pastel {--tag:linear-gradient(135deg,#FFD6E7,#D9CBFF 55%,#BFF0DC);--tagshadow:#BC96D8;--chiptext:#6C3E63}
+.tag-dark   {--tag:linear-gradient(135deg,#3A3550,#1D1A2F);--tagshadow:#0B0918;--chiptext:#fff}
+
+.card{
+  position:relative;display:flex;flex-direction:column;background:var(--paper);
+  border:3px solid var(--ink);border-radius:16px;box-shadow:6px 6px 0 var(--tagshadow);
+  transform:rotate(var(--rot,0deg));overflow:hidden;
+  transition:transform .18s ease, box-shadow .18s ease;
+  animation:popIn .45s cubic-bezier(.34,1.4,.64,1) backwards;
+}
+.grid .card:nth-child(3n+1){--rot:-1.2deg}
+.grid .card:nth-child(3n+2){--rot:1deg}
+.grid .card:nth-child(3n){--rot:-.4deg}
+.card:hover{transform:translateY(-6px) rotate(0deg) scale(1.015);box-shadow:9px 9px 0 var(--tagshadow);z-index:2}
+@keyframes popIn{
+  0%{opacity:0;transform:scale(.85) rotate(var(--rot,0deg)) translateY(16px)}
+  70%{opacity:1;transform:scale(1.03) rotate(var(--rot,0deg)) translateY(-2px)}
+  100%{opacity:1;transform:scale(1) rotate(var(--rot,0deg))}
+}
+.pinwell{
+  position:relative;height:112px;background:var(--tag);border-bottom:3px solid var(--ink);
+  display:flex;align-items:center;justify-content:center;
+}
+.card.wish .pinwell::after{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(45deg,rgba(255,255,255,.22) 0 8px,transparent 8px 16px);
+}
+.medallion{
+  width:70px;height:70px;border-radius:50%;background:#FFFDF4;border:3px solid var(--ink);
+  display:grid;place-items:center;font-family:'Lilita One',cursive;font-size:1.7rem;
+  box-shadow:inset -3px -4px 0 rgba(29,26,47,.12),3px 3px 0 rgba(29,26,47,.35);
+  transform:rotate(-4deg);position:relative;z-index:1;transition:transform .18s ease;
+}
+.card:hover .medallion{transform:rotate(4deg) scale(1.07)}
+.tagchip{
+  position:absolute;left:10px;bottom:9px;background:rgba(255,255,255,.92);
+  border:2px solid var(--ink);border-radius:999px;padding:2px 9px;
+  font-weight:800;font-size:.6rem;letter-spacing:1px;text-transform:uppercase;color:var(--chiptext);z-index:1;
+}
+.stamp{
+  position:absolute;top:9px;right:-6px;background:#fff;border:2.5px solid var(--ink);border-radius:8px;
+  padding:2px 9px;font-family:'Lilita One',cursive;font-size:.66rem;letter-spacing:1px;
+  transform:rotate(7deg);box-shadow:2px 2px 0 var(--ink);z-index:1;
+}
+.card-body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:7px;flex:1}
+.name{font-family:'Lilita One',cursive;font-size:1.08rem;line-height:1.15;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.dup-badge{
+  font-family:'Nunito';font-weight:800;font-size:.56rem;letter-spacing:.5px;background:#FF5D5D;color:#fff;
+  border:2px solid var(--ink);border-radius:7px;padding:1px 6px;transform:rotate(-3deg);flex:none;
+}
+.artist{font-size:.72rem;font-weight:800;color:#6F6890;text-transform:uppercase;letter-spacing:.7px}
+.desc{font-size:.83rem;line-height:1.45;color:#3A3450;flex:1}
+.card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:5px;gap:8px}
+.status{
+  font-weight:800;font-size:.62rem;letter-spacing:.5px;border:2px solid var(--ink);border-radius:999px;
+  padding:3px 9px;text-transform:uppercase;display:inline-flex;gap:4px;align-items:center;white-space:nowrap;
+}
+.st-display{background:var(--teal-soft)}
+.st-storage{background:var(--blue-soft)}
+.st-wish{background:var(--pink-soft)}
+.actions{display:flex;gap:6px}
+.icon-btn{
+  min-width:30px;height:30px;border:2.5px solid var(--ink);background:#fff;border-radius:9px;cursor:pointer;
+  font-size:.82rem;box-shadow:2px 2px 0 var(--ink);transition:transform .12s ease;display:grid;place-items:center;padding:0 4px;
+}
+.icon-btn:hover{transform:translateY(-2px)}
+.icon-btn.armed{background:#FF5D5D;color:#fff;font-family:'Lilita One',cursive;font-size:.66rem;padding:0 8px}
+
+.empty{
+  grid-column:1/-1;text-align:center;padding:56px 20px;background:var(--paper);
+  border:3px dashed var(--ink);border-radius:20px;
+}
+.empty .big{font-size:3rem}
+.empty h3{font-family:'Lilita One',cursive;font-size:1.4rem;margin:10px 0 4px}
+.empty p{font-weight:700;color:#6F6890;margin-bottom:18px}
+
+footer{text-align:center;font-weight:800;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;color:#8A81A8;margin-top:46px}
+
+/* ---------- modal ---------- */
+dialog{
+  border:3px solid var(--ink);border-radius:20px;box-shadow:10px 10px 0 rgba(29,26,47,.9);
+  padding:0;width:min(560px,calc(100vw - 32px));background:var(--paper);font-family:'Nunito';
+}
+dialog::backdrop{background:rgba(29,26,47,.55)}
+.modal-head{display:flex;justify-content:space-between;align-items:center;padding:15px 20px;background:var(--yellow);border-bottom:3px solid var(--ink)}
+.modal-head h2{font-family:'Lilita One',cursive;font-size:1.4rem}
+#pinForm{padding:18px 20px 20px;display:flex;flex-direction:column;gap:15px;max-height:calc(100vh - 120px);overflow:auto}
+.field label{font-weight:800;font-size:.7rem;text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:6px}
+input[type=text],textarea{
+  width:100%;border:3px solid var(--ink);border-radius:12px;padding:10px 12px;
+  font-family:'Nunito';font-size:.92rem;font-weight:600;background:#fff;
+}
+input:focus-visible,textarea:focus-visible{outline:3px solid var(--pink-soft)}
+textarea{resize:vertical;min-height:64px}
+.swatches{display:flex;gap:12px;flex-wrap:wrap}
+.sw{cursor:pointer;text-align:center}
+.sw input{position:absolute;opacity:0;width:1px;height:1px}
+.sw-dot{
+  width:46px;height:46px;border-radius:50%;border:3px solid var(--ink);display:block;
+  box-shadow:3px 3px 0 var(--ink);transition:transform .14s ease, box-shadow .14s ease;
+}
+.sw input:checked ~ .sw-dot{transform:translateY(-3px);box-shadow:0 0 0 3px #fff,0 0 0 6px var(--ink),3px 6px 0 var(--ink)}
+.sw input:focus-visible ~ .sw-dot{box-shadow:0 0 0 3px var(--pink),0 0 0 6px var(--ink)}
+.fill-gold{background:linear-gradient(135deg,#FFE9A8,#FFC933 55%,#E8A200)}
+.fill-silver{background:linear-gradient(135deg,#F4F6FA,#C9D0DC 55%,#9AA4B5)}
+.fill-rainbow{background:conic-gradient(from 200deg,#FF5D5D,#FFB43D,#FFE24D,#5AD86A,#4DC3FF,#9B6BFF,#FF5D5D)}
+.fill-pastel{background:linear-gradient(135deg,#FFD6E7,#D9CBFF 55%,#BFF0DC)}
+.fill-dark{background:linear-gradient(135deg,#3A3550,#1D1A2F)}
+.sw-name{font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-top:5px;display:block}
+.pillgroup{display:flex;gap:10px}
+.pill{flex:1;position:relative}
+.pill input{position:absolute;opacity:0;inset:0}
+.pill span{
+  display:flex;align-items:center;justify-content:center;gap:6px;border:3px solid var(--ink);border-radius:12px;
+  padding:10px;font-weight:800;font-size:.8rem;background:#fff;cursor:pointer;box-shadow:3px 3px 0 var(--ink);transition:.13s;
+}
+.pill input:checked + span{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink)}
+.pill-display input:checked + span{background:var(--teal-soft)}
+.pill-storage input:checked + span{background:var(--blue-soft)}
+fieldset{border:3px solid var(--ink);border-radius:14px;padding:12px 14px;background:#fff}
+fieldset legend{font-weight:800;font-size:.7rem;text-transform:uppercase;letter-spacing:.8px;padding:0 8px}
+fieldset[disabled]{opacity:.45;filter:grayscale(.5);pointer-events:none}
+.switchrow{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;border:3px solid var(--ink);
+  border-radius:14px;padding:10px 14px;background:#fff;
+}
+.switchrow .txt strong{display:block;font-size:.88rem}
+.switchrow .txt em{font-style:normal;font-size:.72rem;font-weight:700;color:#6F6890}
+.switch{position:relative;width:60px;height:32px;flex:none;cursor:pointer}
+.switch input{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:2;margin:0}
+.track{position:absolute;inset:0;border:3px solid var(--ink);border-radius:999px;background:#E8E4F2;transition:.2s}
+.knob{
+  position:absolute;top:4px;left:4px;width:24px;height:24px;border-radius:50%;background:#fff;
+  border:2.5px solid var(--ink);transition:left .2s ease;display:grid;place-items:center;font-size:11px;color:transparent;
+}
+.switch input:checked ~ .track{background:var(--pink)}
+.switch input:checked ~ .knob{left:32px;color:var(--pink)}
+.modal-foot{display:flex;justify-content:flex-end;gap:10px;margin-top:2px}
+
+/* ---------- toast ---------- */
+.toast{
+  position:fixed;left:50%;bottom:24px;transform:translate(-50%,90px);background:var(--ink);color:#fff;
+  border:3px solid #fff;box-shadow:5px 5px 0 rgba(29,26,47,.35);padding:10px 20px;border-radius:999px;
+  font-family:'Lilita One',cursive;letter-spacing:.5px;z-index:99;opacity:0;transition:.3s cubic-bezier(.34,1.4,.64,1);
+  pointer-events:none;font-size:.95rem;
+}
+.toast.show{transform:translate(-50%,0);opacity:1}
+
+@media (max-width:560px){
+  header{justify-content:center;text-align:center}
+  .banner{grid-template-columns:1fr 1fr}
+  .seg{width:100%;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <svg width="48" height="48" viewBox="0 0 46 46" aria-hidden="true">
+      <circle cx="23" cy="23" r="20" fill="#FFC933" stroke="#1D1A2F" stroke-width="3"/>
+      <path d="M23 10l3.6 8.1 8.9.9-6.7 5.9 1.9 8.7-7.7-4.5-7.7 4.5 1.9-8.7-6.7-5.9 8.9-.9z" fill="#FF5D8F" stroke="#1D1A2F" stroke-width="2.5" stroke-linejoin="round"/>
+      <circle cx="15" cy="14" r="3" fill="#fff" opacity=".85"/>
+    </svg>
+    <div>
+      <h1>Patch Pocket</h1>
+      <p class="sub">Enamel Pin Collection Log</p>
+    </div>
+  </div>
+  <button class="btn btn-pink" id="addBtn">＋ Add a Pin</button>
+</header>
+
+<div class="wrap">
+
+  <section class="banner" aria-label="Collection summary">
+    <div class="stat" style="--fill:var(--pink-soft)"><span class="stat-ico">📌</span><div><b id="statOwned" data-v="0">0</b><small>Pins Owned</small></div></div>
+    <div class="stat" style="--fill:var(--blue-soft)"><span class="stat-ico">🌠</span><div><b id="statWish" data-v="0">0</b><small>Wishlisted</small></div></div>
+    <div class="stat" style="--fill:var(--teal-soft)"><span class="stat-ico">🖼️</span><div><b id="statDisplay" data-v="0">0</b><small>On Display</small></div></div>
+  </section>
+
+  <div class="dup-strip" id="dupStrip" hidden></div>
+
+  <section class="controls" aria-label="Filters">
+    <div class="searchwrap">
+      <span class="mag">🔍</span>
+      <input id="searchInput" type="text" placeholder="Search by name or artist…  ( / )" autocomplete="off">
+      <button id="clearSearch" hidden aria-label="Clear search">✕</button>
+    </div>
+    <div class="seg" id="statusSeg">
+      <button data-status="all" class="on">All <b id="cAll">0</b></button>
+      <button data-status="owned">📌 Owned <b id="cOwned">0</b></button>
+      <button data-status="wish">🌠 Wishlist <b id="cWish">0</b></button>
+    </div>
+    <div class="chips" id="colorChips"></div>
+    <select id="sortSel" aria-label="Sort pins">
+      <option value="new">Newest first</option>
+      <option value="old">Oldest first</option>
+      <option value="name">Name A–Z</option>
+    </select>
+  </section>
+
+  <p class="result-line" id="resultLine"></p>
+
+  <main class="grid" id="pinGrid"></main>
+
+  <footer>Keep it shiny ✦ Patch Pocket</footer>
+</div>
+
+<dialog id="pinModal" aria-labelledby="modalTitle">
+  <div class="modal-head">
+    <h2 id="modalTitle">Add a Pin</h2>
+    <button class="btn btn-ghost" id="closeModalBtn" style="padding:.4rem .8rem;font-size:.85rem">✕</button>
+  </div>
+  <form id="pinForm">
+    <div class="field">
+      <label for="fName">Pin Name *</label>
+      <input type="text" id="fName" name="name" maxlength="48" required placeholder="e.g. Whisker Bop Cat">
+    </div>
+    <div class="field">
+      <label for="fArtist">Series / Artist</label>
+      <input type="text" id="fArtist" name="artist" maxlength="48" placeholder="e.g. Mews &amp; Co. · Clover Series">
+    </div>
+    <div class="field">
+      <label for="fDesc">Short Description</label>
+      <textarea id="fDesc" name="desc" maxlength="160" placeholder="What makes this little treasure special?"></textarea>
+    </div>
+    <div class="field">
+      <label>Color Tag</label>
+      <div class="swatches" id="swatches">
+        <label class="sw"><input type="radio" name="color" value="gold" checked><span class="sw-dot fill-gold"></span><span class="sw-name">Gold</span></label>
+        <label class="sw"><input type="radio" name="color" value="silver"><span class="sw-dot fill-silver"></span><span class="sw-name">Silver</span></label>
+        <label class="sw"><input type="radio" name="color" value="rainbow"><span class="sw-dot fill-rainbow"></span><span class="sw-name">Rainbow</span></label>
+        <label class="sw"><input type="radio" name="color" value="pastel"><span class="sw-dot fill-pastel"></span><span class="sw-name">Pastel</span></label>
+        <label class="sw"><input type="radio" name="color" value="dark"><span class="sw-dot fill-dark"></span><span class="sw-name">Dark</span></label>
+      </div>
+    </div>
+    <fieldset id="fieldsetStatus">
+      <legend>Where it lives</legend>
+      <div class="pillgroup">
+        <label class="pill pill-display"><input type="radio" name="status" value="display" checked><span>🖼️ On Display</span></label>
+        <label class="pill pill-storage"><input type="radio" name="status" value="storage"><span>📦 In Storage</span></label>
+      </div>
+    </fieldset>
+    <div class="switchrow">
+      <div class="txt">
+        <strong>🌠 Wishlist pin</strong>
+        <em>Hunting for it — don't own it yet!</em>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="fWish" name="wishlist">
+        <span class="track"></span>
+        <span class="knob">★</span>
+      </label>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="btn btn-ghost" id="cancelBtn">Cancel</button>
+      <button type="submit" class="btn btn-pink" id="saveBtn">📌 Add Pin</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+'use strict';
+const STORE_KEY = 'patchPocketPins.v1';
+const COLORS = ['gold','silver','rainbow','pastel','dark'];
+const COLOR_META = {
+  gold:{label:'Gold'}, silver:{label:'Silver'}, rainbow:{label:'Rainbow'},
+  pastel:{label:'Pastel'}, dark:{label:'Dark'}
+};
+
+const state = { q:'', color:'all', status:'all', sort:'new' };
+let pins = [];
+let editingId = null;
+let armTimer = null;
+
+/* ---------- dom refs ---------- */
+const grid = document.getElementById('pinGrid');
+const colorChips = document.getElementById('colorChips');
+const searchInput = document.getElementById('searchInput');
+const clearSearch = document.getElementById('clearSearch');
+const statusSeg = document.getElementById('statusSeg');
+const sortSel = document.getElementById('sortSel');
+const resultLine = document.getElementById('resultLine');
+const dupStrip = document.getElementById('dupStrip');
+const modal = document.getElementById('pinModal');
+const pinForm = document.getElementById('pinForm');
+const modalTitle = document.getElementById('modalTitle');
+const saveBtn = document.getElementById('saveBtn');
+const fName = document.getElementById('fName');
+const fArtist = document.getElementById('fArtist');
+const fDesc = document.getElementById('fDesc');
+const fWish = document.getElementById('fWish');
+const fieldsetStatus = document.getElementById('fieldsetStatus');
+const toastEl = document.getElementById('toast');
+let toastTimer = null;
+
+/* ---------- utils ---------- */
+function esc(s){
+  return String(s ?? '').replace(/[&<>"']/g, c =>
+    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function uid(){
+  return (crypto.randomUUID ? crypto.randomUUID() : 'p' + Date.now() + Math.random().toString(16).slice(2));
+}
+function toast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>toastEl.classList.remove('show'), 2400);
+}
+function animateNumber(el, to){
+  const from = parseInt(el.dataset.v || '0', 10);
+  if(from === to){ el.textContent = to; return; }
+  el.dataset.v = to;
+  const start = performance.now(), dur = 600;
+  (function step(t){
+    const k = Math.min(1, (t - start) / dur);
+    const eased = 1 - Math.pow(1 - k, 3);
+    el.textContent = Math.round(from + (to - from) * eased);
+    if(k < 1) requestAnimationFrame(step);
+  })(start);
+}
+
+/* ---------- persistence ---------- */
+function loadPins(){
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    if(raw){ const d = JSON.parse(raw); if(Array.isArray(d)) return d; }
+  }catch(e){}
+  return null;
+}
+function savePins(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(pins)); }catch(e){}
+}
+function seedPins(){
+  const day = 864e5, now = Date.now();
+  const mk = (n,a,d,c,st,w,ago) => ({ id:uid(), name:n, artist:a, desc:d, color:c, status:st, wishlist:w, createdAt:now - ago*day });
+  return [
+    mk('Whisker Bop Cat','Mews & Co. · Clover Series','Cloisonné kitty mid-stretch with 24k-lined whiskers. My grail find from the spring market.','gold','display',false,46),
+    mk('Whisker Bop Cat','Mews & Co. · Clover Series','Bought at the night market before realising I already owned this exact kitty. Duplicate!','gold','storage',false,3),
+    mk('Boombox Blast','Cassette Club','Chunky retro boombox with a rainbow equalizer stripe. Press play in your heart.','rainbow','storage',false,39),
+    mk('Soft Power Fist','Riot Trinket Co.','Matte-black protest badge with a tiny raised fist. Small pin, loud message.','dark','display',false,21),
+    mk('Pastel Drip Cone','Scoops of Joy','Triple-scoop cone melting in mint, lilac and peach. Zero calories.','pastel','display',false,12),
+    mk('Moon Frog','Critter Cosmos','Silver frog riding a crescent moon. Croaks at midnight (it doesn\'t).','silver','storage',false,58),
+    mk('Disco Turtle','Groove Shell Records','Tiny turtle with a mirror-ball shell, ready to boogie.','rainbow','display',false,29),
+    mk('Lilac Nap Cloud','Snoozle Studio','A very soft cloud taking a very important nap.','pastel','storage',false,8),
+    mk('Space Whale','Critter Cosmos','Hunting this whale drifting through enamel stars. Trades welcome!','rainbow','display',true,6),
+    mk('Chrome Koi','Inkwater Studio','Rumoured limited run of 50. Will trade almost anything.','silver','storage',true,1)
+  ];
+}
+
+/* ---------- derived data ---------- */
+function dupGroups(){
+  const map = new Map();
+  pins.forEach(p=>{
+    const k = (p.name + '|' + (p.artist||'')).toLowerCase().replace(/\s+/g,' ');
+    map.set(k,(map.get(k)||0)+1);
+  });
+  return [...map.entries()].filter(([,n])=>n>1);
+}
+function dupKey(p){
+  return (p.name + '|' + (p.artist||'')).toLowerCase().replace(/\s+/g,' ');
+}
+function getFiltered(){
+  let list = pins.slice();
+  if(state.status==='owned') list = list.filter(p=>!p.wishlist);
+  else if(state.status==='wish') list = list.filter(p=>p.wishlist);
+  if(state.color!=='all') list = list.filter(p=>p.color===state.color);
+  const q = state.q.trim().toLowerCase();
+  if(q) list = list.filter(p=>p.name.toLowerCase().includes(q) || (p.artist||'').toLowerCase().includes(q));
+  list.sort(sorter());
+  return list;
+}
+function sorter(){
+  if(state.sort==='old') return (a,b)=>a.createdAt-b.createdAt;
+  if(state.sort==='name') return (a,b)=>a.name.localeCompare(b.name);
+  return (a,b)=>b.createdAt-a.createdAt;
+}
+
+/* ---------- render ---------- */
+function renderStats(){
+  const owned = pins.filter(p=>!p.wishlist).length;
+  const wish = pins.filter(p=>p.wishlist).length;
+  const display = pins.filter(p=>!p.wishlist && p.status==='display').length;
+  animateNumber(document.getElementById('statOwned'), owned);
+  animateNumber(document.getElementById('statWish'), wish);
+  animateNumber(document.getElementById('statDisplay'), display);
+  document.getElementById('cAll').textContent = pins.length;
+  document.getElementById('cOwned').textContent = owned;
+  document.getElementById('cWish').textContent = wish;
+
+  const sets = dupGroups();
+  if(sets.length){
+    const names = sets.map(([k,n])=>esc(k.split('|')[0]) + ' ×' + n).join(' · ');
+    dupStrip.innerHTML = '⚠️ <b>' + sets.length + ' duplicate set' + (sets.length>1?'s':'') + '</b>&nbsp;spotted — ' + names + '. Check before you buy!';
+    dupStrip.hidden = false;
+  } else dupStrip.hidden = true;
+}
+
+function renderChips(){
+  const counts = {gold:0,silver:0,rainbow:0,pastel:0,dark:0};
+  pins.forEach(p=>{ if(counts[p.color]!=null) counts[p.color]++; });
+  let html = '<button class="chip chip-all' + (state.color==='all'?' on':'') + '" data-color="all">All Pins</button>';
+  COLORS.forEach(c=>{
+    html += '<button class="chip chip-' + c + (state.color===c?' on':'') + '" data-color="' + c + '">' +
+      '<span class="dot dot-' + c + '"></span>' + COLOR_META[c].label + '<b>' + counts[c] + '</b></button>';
+  });
+  colorChips.innerHTML = html;
+}
+
+function statusChipHTML(p){
+  if(p.wishlist) return '<span class="status st-wish">🌠 Wishlist</span>';
+  return p.status==='display'
+    ? '<span class="status st-display">🖼️ On Display</span>'
+    : '<span class="status st-storage">📦 In Storage</span>';
+}
+
+function cardHTML(p, idx, isDup){
+  const letter = (p.name.trim().charAt(0) || '★').toUpperCase();
+  const delay = Math.min(idx*40, 360);
+  return '<article class="card tag-' + p.color + (p.wishlist?' wish':'') + '" data-id="' + p.id + '" style="animation-delay:' + delay + 'ms">' +
+    '<div class="pinwell">' +
+      '<div class="medallion">' + esc(letter) + '</div>' +
+      '<span class="tagchip">' + COLOR_META[p.color].label + '</span>' +
+      (p.wishlist ? '<span class="stamp">★ WANTED</span>' : '') +
+    '</div>' +
+    '<div class="card-body">' +
+      '<h3 class="name">' + esc(p.name) + (isDup ? '<span class="dup-badge">DUP ×' + '' + '</span>' : '') + '</h3>' +
+      (p.artist ? '<p class="artist">✦ ' + esc(p.artist) + '</p>' : '<p class="artist" style="opacity:.5">✦ unattributed</p>') +
+      (p.desc ? '<p class="desc">' + esc(p.desc) + '</p>' : '<p class="desc" style="opacity:.5;font-style:italic">No description yet…</p>') +
+      '<div class="card-foot">' + statusChipHTML(p) +
+        '<div class="actions">' +
+          '<button class="icon-btn" data-act="edit" title="Edit pin" aria-label="Edit pin">✏️</button>' +
+          '<button class="icon-btn" data-act="del" title="Delete pin" aria-label="Delete pin">🗑</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+  '</article>';
+}
+
+function emptyHTML(){
+  if(pins.length===0){
+    return '<div class="empty"><div class="big">🪅</div><h3>Your board is bare!</h3>' +
+      '<p>Add your first pin and start the collection.</p>' +
+      '<button class="btn btn-pink" data-act="addfirst">＋ Add your first pin</button></div>';
+  }
+  return '<div class="empty"><div class="big">🫥</div><h3>No pins match</h3>' +
+    '<p>Try a different search or clear the filters.</p>' +
+    '<button class="btn btn-yellow" data-act="clearfilters">Clear filters</button></div>';
+}
+
+function renderGrid(){
+  const list = getFiltered();
+  const dups = new Set(dupGroups().map(([k])=>k));
+  if(!list.length){ grid.innerHTML = emptyHTML(); }
+  else{
+    grid.innerHTML = list.map((p,i)=>cardHTML(p, i, dups.has(dupKey(p)))).join('');
+  }
+  resultLine.textContent = list.length + ' pin' + (list.length===1?'':'s') + ' on the board';
+}
+
+function renderAll(){ renderStats(); renderChips(); renderGrid(); }
+
+/* ---------- modal ---------- */
+function openModal(id){
+  editingId = id || null;
+  pinForm.reset();
+  if(editingId){
+    const p = pins.find(x=>x.id===editingId);
+    if(!p) return;
+    modalTitle.textContent = 'Edit Pin';
+    saveBtn.textContent = '✨ Save Changes';
+    fName.value = p.name; fArtist.value = p.artist || ''; fDesc.value = p.desc || '';
+    const colorRadio = pinForm.querySelector('input[name=color][value="' + p.color + '"]');
+    if(colorRadio) colorRadio.checked = true;
+    const statusRadio = pinForm.querySelector('input[name=status][value="' + (p.status||'display') + '"]');
+    if(statusRadio) statusRadio.checked = true;
+    fWish.checked = !!p.wishlist;
+  } else {
+    modalTitle.textContent = 'Add a Pin';
+    saveBtn.textContent = '📌 Add Pin';
+    pinForm.querySelector('input[name=color][value=gold]').checked = true;
+    pinForm.querySelector('input[name=status][value=display]').checked = true;
+    fWish.checked = false;
+  }
+  fieldsetStatus.disabled = fWish.checked;
+  modal.showModal();
+  setTimeout(()=>fName.focus(), 50);
+}
+
+pinForm.addEventListener('submit', e=>{
+  e.preventDefault();
+  const name = fName.value.trim();
+  if(!name){ fName.focus(); return; }
+  const data = {
+    name,
+    artist: fArtist.value.trim(),
+    desc: fDesc.value.trim(),
+    color: pinForm.color.value,
+    status: pinForm.status.value,
+    wishlist: fWish.checked
+  };
+  if(editingId){
+    const p = pins.find(x=>x.id===editingId);
+    if(p) Object.assign(p, data);
+    toast('Pin updated ✨');
+  } else {
+    pins.push(Object.assign({ id:uid(), createdAt:Date.now() }, data));
+    toast('Pin added to the board 📌');
+  }
+  savePins();
+  renderAll();
+  modal.close();
+});
+
+fWish.addEventListener('change', ()=>{ fieldsetStatus.disabled = fWish.checked; });
+document.getElementById('cancelBtn').addEventListener('click', ()=>modal.close());
+document.getElementById('closeModalBtn').addEventListener('click', ()=>modal.close());
+modal.addEventListener('close', ()=>{ editingId = null; });
+
+/* ---------- events ---------- */
+document.getElementById('addBtn').addEventListener('click', ()=>openModal(null));
+
+grid.addEventListener('click', e=>{
+  const actBtn = e.target.closest('[data-act]');
+  if(!actBtn) return;
+  const act = actBtn.dataset.act;
+  if(act==='addfirst'){ openModal(null); return; }
+  if(act==='clearfilters'){
+    state.q=''; searchInput.value=''; clearSearch.hidden = true;
+    state.color='all'; state.status='all';
+    statusSeg.querySelectorAll('button').forEach(b=>b.classList.toggle('on', b.dataset.status==='all'));
+    renderChips(); renderGrid();
+    return;
+  }
+  const card = actBtn.closest('.card');
+  if(!card) return;
+  const id = card.dataset.id;
+  if(act==='edit'){ openModal(id); }
+  else if(act==='del'){
+    if(actBtn.classList.contains('armed')){
+      clearTimeout(armTimer);
+      pins = pins.filter(p=>p.id!==id);
+      savePins(); renderAll(); toast('Pin removed 🗑');
+    } else {
+      document.querySelectorAll('.icon-btn.armed').forEach(b=>{ b.classList.remove('armed'); b.textContent='🗑'; });
+      actBtn.classList.add('armed');
+      actBtn.textContent = 'Sure?';
+      clearTimeout(armTimer);
+      armTimer = setTimeout(()=>{
+        if(actBtn.isConnected){ actBtn.classList.remove('armed'); actBtn.textContent='🗑'; }
+      }, 2600);
+    }
+  }
+});
+
+colorChips.addEventListener('click', e=>{
+  const chip = e.target.closest('.chip');
+  if(!chip) return;
+  state.color = chip.dataset.color;
+  renderChips(); renderGrid();
+});
+
+statusSeg.addEventListener('click', e=>{
+  const btn = e.target.closest('button[data-status]');
+  if(!btn) return;
+  state.status = btn.dataset.status;
+  statusSeg.querySelectorAll('button').forEach(b=>b.classList.toggle('on', b===btn));
+  renderGrid();
+});
+
+searchInput.addEventListener('input', ()=>{
+  state.q = searchInput.value;
+  clearSearch.hidden = !searchInput.value;
+  renderGrid();
+});
+clearSearch.addEventListener('click', ()=>{
+  searchInput.value=''; state.q=''; clearSearch.hidden = true; searchInput.focus(); renderGrid();
+});
+
+sortSel.addEventListener('change', ()=>{ state.sort = sortSel.value; renderGrid(); });
+
+document.addEventListener('keydown', e=>{
+  if(e.key==='/' && !modal.open){
+    const tag = document.activeElement && document.activeElement.tagName;
+    if(tag!=='INPUT' && tag!=='TEXTAREA' && tag!=='SELECT'){
+      e.preventDefault(); searchInput.focus();
+    }
+  }
+});
+
+/* ---------- init ---------- */
+const loaded = loadPins();
+if(loaded){ pins = loaded; }
+else { pins = seedPins(); savePins(); }
+renderAll();
+})();
+</script>
+</body>
+</html>
